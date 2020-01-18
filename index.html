@@ -20,12 +20,16 @@
     </nav>
     <!-- End NavBar -->
 
+
 <!-- Main Div -->
 <div class="container dashboard">
+   <div id="notification">
+       
+   </div>
    <div class="card">
        <div class="card-header">
         <button class="btn btn-info float-right ml-1 dropdown-toggle" data-toggle="dropdown"><i class="fas fa-search"></i></button>
-        <button class="btn btn-success float-right ml-1" data-toggle="modal" data-target="#addPatient"><i class="fas fa-plus"></i></button>
+        <button class="btn btn-success float-right ml-1" onclick="addButton()" data-toggle="modal" data-target="#addPatient"><i class="fas fa-plus"></i></button>
        
         <div class="dropdown-menu">
             <div class="drop-body ml-4">
