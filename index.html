@@ -26,7 +26,7 @@
    <div id="notification">
        
    </div>
-   <div class="card">
+   <div class="card card-sticky-top">
        <div class="card-header">
         <button class="btn btn-info float-right ml-1 dropdown-toggle" data-toggle="dropdown"><i class="fas fa-search"></i></button>
         <button class="btn btn-success float-right ml-1" onclick="addButton()" data-toggle="modal" data-target="#addPatient"><i class="fas fa-plus"></i></button>
@@ -49,9 +49,9 @@
           </div>    
     </div>
    </div>
-    <div class="container">
+    <div class="container text-center">
         <div class="row" id ="showPatient">
-            <div class="col-3 mt-3" >
+            <!-- <div class="col-3 mt-3" >
                <div class="card text-center">
                    <div class="card-body card-shaddow">
                        <h5 class="card-title">Paitent Name</h5>
@@ -60,7 +60,7 @@
                        <button class="btn btn-info" type="button">View History</button>
                    </div>
                </div>
-            </div>
+            </div> -->
         </div>    
     </div>
 </div>
@@ -70,7 +70,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>Add Paitents</h4>
+                <h4 id="modalName">Add Paitents</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -78,18 +78,16 @@
                   <div class="row">
                       <div class="col-6">
                         <div class="form-group">
-                            <label for="name">Patient Name</label>
-                            <input id="name" class="form-control" type="text" name="Name">
+                            <label for="paitntID">Patient ID</label>
+                            <input id="paitntID" class="form-control" type="text" disabled>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                            <label for="paitntID">Patient ID</label>
-                            <input id="paitntID" class="form-control" type="text" disabled>
-                        </div>
-                        
+                            <label for="name">Patient Name</label>
+                            <input id="name" class="form-control" type="text" name="Name">
+                        </div> 
                       </div>
-                      
                   </div>
                   <div class="row">
                     <div class="col-6">
@@ -97,38 +95,26 @@
                             <label for="age">Patient Age</label>
                             <input id="age" class="form-control" min="0" max="100" type="number">
                         </div>
-                     
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                          
                             <label for="number">Patient Number</label>
                             <input id="number" class="form-control" type="number" name="number">
                         </div>
                     </div>
-                </div>
-                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
-                            <label for="disease">Patient Disease</label>
-                            <input id="disease" class="form-control" type="text">
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group">
-                            <label for="date">Appointment Date</label>
-                            <input id="date" class="form-control" type="date">
-                        </div>
-                      </div>
-                 </div>
-                 <div class="row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="medication">Medication</label>
-                                <textarea id="medication" class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-                      </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="gender" value="female">Female
+                            </label>
+                          </div>
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="gender" value="male">Male
+                            </label>
+                          </div>
+                    </div>
+                </div>
               </form>
             </div>
             <div class="modal-footer">
@@ -139,6 +125,30 @@
     </div>
 </div>
 <!--End Modal  -->
+
+
+
+<!-- Delete Promtp -->
+
+<div id="#" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><strong>Alert!!!</strong></h3>
+            </div>
+            <div class="modal-body">
+                <p>You really want to the record</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"  data-dismiss="modal" id="btnAddPaitent"><i class="fas fa-check"></i></button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Delete Prompt -->
+
     <script src="js/jquery-3.2.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
