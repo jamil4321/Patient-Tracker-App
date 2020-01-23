@@ -12,6 +12,8 @@ const btnAddPaitent = document.getElementById("btnAddPaitent");
 const showPaitent = document.getElementById("showPatient");
 const notification = document.getElementById("notification");
 const searchByName = document.getElementById("searchByName");
+const searchByID = document.getElementById('searchByID');
+const searchByDate = document.getElementById('searchByDate')
 const radioButton = document.getElementsByName("gender");
 const modalName = document.getElementById("modalName");
 const modalbody = document.getElementById("body");
@@ -56,7 +58,7 @@ db.ref("patients/").on("value", snapshot => {
   for (let i = 0; i < paitentData.length; i++) {
     let key = paitentData[i].id.split("-");
     showPaitent.innerHTML += `
-        <div class="col-3 mt-3" >
+        <div class="col-xs-13 col-sm-6 col-md-4 col-lg-3 mt-3" >
         <div class="card text-center card-shaddow">
             <div class="card-body ">
                 <h5 class="card-title">Name : <strong>${paitentData[
@@ -74,6 +76,9 @@ db.ref("patients/").on("value", snapshot => {
                 <p class="card-text">Paitent Id : ${paitentData[
                   i
                 ].id.toUpperCase()}</p>
+                <p style="display: none;"> ${paitentData[
+                  i
+                ].date}</p>
                 <button class="btn btn-info" type="button" data-toggle="modal" 
                 data-target="#addPatient" onclick="getPaitent(${key[1]})">
                 <i class="fas fa-search"></i>
@@ -153,6 +158,7 @@ function getPaitent(getId) {
       
       for(let i = 0; i < arrDate.length;i++){
         history.innerHTML += `
+          <hr/>
             <h6>${arrDate[i]}</h6>
             <p>${arrDisease[i]}</p>
             <p>${arrMedication[i]}</p>
@@ -267,15 +273,62 @@ function deletePaitent(getId) {
   db.ref("patients/p-" + getId).remove();
 }
 
-// Search
-// let nameArr = [];
+// Search By Name
 searchByName.addEventListener("keyup", e => {
-  let key = e.target.value.toLowerCase();
-  paitentData.forEach(name => {
-    if (name.indexOf(key) != -1) {
-      console.log(name);
+  let key = e.target.value.toUpperCase();
+  let cardShaddow = showPaitent.getElementsByClassName('card-shaddow')
+  for (let i = 0 ; i < cardShaddow.length; i++){
+        if (cardShaddow[i].innerText.toUpperCase().indexOf(key) > -1) {
+      cardShaddow[i].parentElement.style.display = ''
+      console.log(key)
     } else {
-      console.log("no item found");
+      cardShaddow[i].parentElement.style.display = 'none'
+      console.log(key,'notfound')
     }
-  });
+  }
+});
+
+// Search By ID
+searchByID.addEventListener("keyup", e => {
+  let key = e.target.value.toUpperCase();
+  let cardShaddow = showPaitent.getElementsByClassName('card-shaddow')
+  for (let i = 0 ; i < cardShaddow.length; i++){
+        if (cardShaddow[i].innerText.toUpperCase().indexOf(key) > -1) {
+      cardShaddow[i].parentElement.style.display = ''
+      console.log(key)
+    } else {
+      cardShaddow[i].parentElement.style.display = 'none'
+      console.log(key,'notfound')
+    }
+  }
+});
+
+// search By ID
+searchByID.addEventListener("keyup", e => {
+  let key = e.target.value.toUpperCase();
+  let cardShaddow = showPaitent.getElementsByClassName('card-shaddow')
+  for (let i = 0 ; i < cardShaddow.length; i++){
+        if (cardShaddow[i].innerText.toUpperCase().indexOf(key) > -1) {
+      cardShaddow[i].parentElement.style.display = ''
+      console.log(key)
+    } else {
+      cardShaddow[i].parentElement.style.display = 'none'
+      console.log(key,'notfound')
+    }
+  }
+});
+// search by Date
+
+searchByDate.addEventListener("keyup", e => {
+  let key = e.target.value.toUpperCase();
+  let cardShaddow = showPaitent.getElementsByClassName('card-shaddow')
+  for (let i = 0 ; i < cardShaddow.length; i++){
+        if (cardShaddow[i].innerText.toUpperCase().indexOf(key) > -1) {
+      cardShaddow[i].parentElement.style.display = ''
+      console.log(key,'found')
+    } else {
+      cardShaddow[i].parentElement.style.display = 'none'
+      console.log(key,'notfound')
+    }
+  }
 });
