@@ -49,6 +49,7 @@ function addButton() {
   age.value = "";
   number.value = "";
   body.innerHTML = "";
+  history.innerHTML = "";
 }
 // View DATA in HTML
 db.ref("patients/").on("value", snapshot => {
