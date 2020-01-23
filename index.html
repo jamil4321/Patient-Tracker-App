@@ -73,7 +73,7 @@
                 <h4 id="modalName">Add Paitents</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" >
               <form method="post" action="javasricpt:void(0)">
                   <div class="row">
                       <div class="col-6">
@@ -116,6 +116,10 @@
                     </div>
                 </div>
               </form>
+              <div id="body">
+              </div>
+              <div id="history">
+            </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="addPaitent()" data-dismiss="modal" id="btnAddPaitent"><i class="fas fa-check"></i></button>
@@ -128,19 +132,41 @@
 
 
 
-<!-- Delete Promtp -->
+<!-- add Medical History -->
 
-<div id="#" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div id="addHistory" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><strong>Alert!!!</strong></h3>
+                <h5><strong>Medical Histo</strong></h5>
             </div>
             <div class="modal-body">
-                <p>You really want to the record</p>
+                <form method="get" action="javascript:void(0)">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="date">Appointment Date : </label>
+                                <input id="date" class="form-control" type="date">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="disease">Disease: </label>
+                                <input id="disease" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="medication">Medication: </label>
+                                <textarea id="medication" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success"  data-dismiss="modal" id="btnAddPaitent"><i class="fas fa-check"></i></button>
+                <button type="button" class="btn btn-success"  data-dismiss="modal" id="btnAddHistory"><i class="fas fa-check"></i></button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i></button>
             </div>
         </div>
