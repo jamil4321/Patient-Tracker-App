@@ -61,19 +61,19 @@ db.ref("patients/").on("value", snapshot => {
         <div class="col-xs-13 col-sm-6 col-md-4 col-lg-3 mt-3" >
         <div class="card text-center card-shaddow">
             <div class="card-body ">
-                <h5 class="card-title">Name : <strong>${paitentData[
+                <h5 class="card-title">Name<br/> <strong>${paitentData[
                   i
                 ].name.toUpperCase()}</strong></h5>
-                <p class="card-text">Number : ${paitentData[
+                <p class="card-text">Number<br/> ${paitentData[
                   i
                 ].number.toUpperCase()}</p>
-                <p class="card-text">Age : ${paitentData[
+                <p class="card-text">Age<br/> ${paitentData[
                   i
                 ].age.toUpperCase()}</p>
-                <p class="card-text">Gender : ${paitentData[
+                <p class="card-text">Gender<br/>${paitentData[
                   i
                 ].gender.toUpperCase()}</p>
-                <p class="card-text">Paitent Id : ${paitentData[
+                <p class="card-text">Paitent Id<br/> ${paitentData[
                   i
                 ].id.toUpperCase()}</p>
                 <p style="display: none;"> ${paitentData[
@@ -140,14 +140,17 @@ function getPaitent(getId) {
   name.disabled = true;
   age.disabled = true;
   number.disabled = true;
-  db.ref("patients/p-" + getId).once("value", data => {
+  radioButton[0].disabled = true;
+  radioButton[1].disabled = true;
+
+  db.ref("patients/p-" + getId).on("value", data => {
     dbData = data.val();
     name.value = dbData.name;
     paitentID.value = dbData.id;
     age.value = dbData.age;
     number.value = dbData.number;
     if (dbData.gender == "male") {
-      radioButton[1].checdateked = true;
+      radioButton[1].checked = true;
     } else {
       radioButton[0].checked = true;
     }
@@ -159,9 +162,9 @@ function getPaitent(getId) {
       for(let i = 0; i < arrDate.length;i++){
         history.innerHTML += `
           <hr/>
-            <h6>${arrDate[i]}</h6>
-            <p>${arrDisease[i]}</p>
-            <p>${arrMedication[i]}</p>
+            <h6>Appointment Date : ${arrDate[i]}</h6>
+            <p>Paitent Disease : ${arrDisease[i]}</p>
+            <p>Medication : ${arrMedication[i]}</p>
         `
       }
     }
@@ -191,7 +194,7 @@ function getPaitent(getId) {
 // add History Record
 
 function addPaitentHistory(getId) {
-  db.ref('patients/p-'+getId).once('value',data =>{
+  db.ref('patients/p-'+getId).on('value',data =>{
     dbData = data.val()
   })
   if(!dbData.date){
@@ -245,6 +248,7 @@ function getPaitentForUpdate(getId) {
     age.value = dbData.age;
     number.value = dbData.number;
     if (dbData.gender == "male") {
+
       radioButton[1].checked = true;
     } else {
       radioButton[0].checked = true;
