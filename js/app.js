@@ -143,8 +143,10 @@ function getPaitent(getId) {
   number.disabled = true;
   radioButton[0].disabled = true;
   radioButton[1].disabled = true;
-
+  history.style.overflowY='scroll';
+  history.style.height= '150px'
   db.ref("patients/p-" + getId).on("value", data => {
+    history.innerHTML = ""
     dbData = data.val();
     name.value = dbData.name;
     paitentID.value = dbData.id;
@@ -159,6 +161,7 @@ function getPaitent(getId) {
       arrDate = dbData.date
       arrDisease = dbData.disease
       arrMedication = dbData.medication
+  
       
       for(let i = 0; i < arrDate.length;i++){
         history.innerHTML += `
