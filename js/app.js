@@ -195,7 +195,7 @@ function getPaitent(getId) {
 // add History Record
 
 function addPaitentHistory(getId) {
-  db.ref('patients/p-'+getId).on('value',data =>{
+  db.ref('patients/p-'+getId).once  ('value',data =>{
     dbData = data.val()
   })
   if(!dbData.date){
