@@ -17,7 +17,9 @@ const searchByDate = document.getElementById('searchByDate')
 const radioButton = document.getElementsByName("gender");
 const modalName = document.getElementById("modalName");
 const modalbody = document.getElementById("body");
-const history = document.getElementById('history')
+const history = document.getElementById('history');
+const cardShaddow = showPaitent.getElementsByClassName('card-shaddow');
+const btnDelete  = document.getElementById('btnDelete');
 let gender;
 let paitentData = [];
 let pid;
@@ -54,12 +56,20 @@ function addButton() {
 // View DATA in HTML
 db.ref("patients/").on("value", snapshot => {
   showPaitent.innerHTML = "";
-  if (!snapshot.val()) return;
+  if (!snapshot.val()){
+    showPaitent.innerHTML = `
+    <div class="col-12">
+    <h6 class ="mt-5" >There is no Record Click Add Button to Add New Record
+  </h6>
+  </div>
+  
+    `;
+  }else{
   paitentData = Object.values(snapshot.val());
   for (let i = 0; i < paitentData.length; i++) {
     let key = paitentData[i].id.split("-");
     showPaitent.innerHTML += `
-        <div class="col-xs-13 col-sm-6 col-md-4 col-lg-3 mt-3" >
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3" >
         <div class="card text-center card-shaddow">
             <div class="card-body ">
                 <h5 class="card-title">Name<br/> <strong>${paitentData[
@@ -74,7 +84,7 @@ db.ref("patients/").on("value", snapshot => {
                 <p class="card-text">Gender<br/>${paitentData[
                   i
                 ].gender.toUpperCase()}</p>
-                <p class="card-text">Paitent Id<br/> ${paitentData[
+                <p class="card-text paitentID">Paitent Id<br/>${paitentData[
                   i
                 ].id.toUpperCase()}</p>
                 <p style="display: none;"> ${paitentData[
@@ -97,7 +107,7 @@ db.ref("patients/").on("value", snapshot => {
             </div>
         </div>`;
   }
-});
+}});
 
 // Add Paitent Data
 function addPaitent() {
@@ -161,8 +171,9 @@ function getPaitent(getId) {
       arrDate = dbData.date
       arrDisease = dbData.disease
       arrMedication = dbData.medication
-  
-      
+      arrDate = arrDate.reverse()
+      arrDisease =arrDisease.reverse()
+      arrMedication = arrMedication.reverse()
       for(let i = 0; i < arrDate.length;i++){
         history.innerHTML += `
           <hr/>
@@ -278,6 +289,11 @@ function updatePaitnet(id, pname, page, pnumber) {
 
 // delete Paitent
 function deletePaitent(getId) {
+
+  btnDelete.onclick = function(){ promptDelet(getId)}
+}
+
+function promptDelet(getId){
   db.ref("patients/p-" + getId).remove();
 }
 
@@ -286,7 +302,7 @@ searchByName.addEventListener("keyup", e => {
   let key = e.target.value.toUpperCase();
   let cardShaddow = showPaitent.getElementsByClassName('card-shaddow')
   for (let i = 0 ; i < cardShaddow.length; i++){
-        if (cardShaddow[i].innerText.toUpperCase().indexOf(key) > -1) {
+        if (cardShaddow[i].getElementsByTagName('strong')[0].innerText.toUpperCase().indexOf(key) > -1) {
       cardShaddow[i].parentElement.style.display = ''
       console.log(key)
     } else {
@@ -296,27 +312,12 @@ searchByName.addEventListener("keyup", e => {
   }
 });
 
-// Search By ID
-searchByID.addEventListener("keyup", e => {
-  let key = e.target.value.toUpperCase();
-  let cardShaddow = showPaitent.getElementsByClassName('card-shaddow')
-  for (let i = 0 ; i < cardShaddow.length; i++){
-        if (cardShaddow[i].innerText.toUpperCase().indexOf(key) > -1) {
-      cardShaddow[i].parentElement.style.display = ''
-      console.log(key)
-    } else {
-      cardShaddow[i].parentElement.style.display = 'none'
-      console.log(key,'notfound')
-    }
-  }
-});
 
 // search By ID
 searchByID.addEventListener("keyup", e => {
   let key = e.target.value.toUpperCase();
-  let cardShaddow = showPaitent.getElementsByClassName('card-shaddow')
   for (let i = 0 ; i < cardShaddow.length; i++){
-        if (cardShaddow[i].innerText.toUpperCase().indexOf(key) > -1) {
+        if (cardShaddow[i].getElementsByClassName('paitentID')[0].innerText.indexOf(key) > -1) {
       cardShaddow[i].parentElement.style.display = ''
       console.log(key)
     } else {
@@ -325,11 +326,12 @@ searchByID.addEventListener("keyup", e => {
     }
   }
 });
+
+
 // search by Date
 
 searchByDate.addEventListener("keyup", e => {
-  let key = e.target.value.toUpperCase();
-  let cardShaddow = showPaitent.getElementsByClassName('card-shaddow')
+  let key = e.target.value;
   for (let i = 0 ; i < cardShaddow.length; i++){
         if (cardShaddow[i].innerText.toUpperCase().indexOf(key) > -1) {
       cardShaddow[i].parentElement.style.display = ''

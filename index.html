@@ -17,6 +17,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top ">
         <a class="navbar-brand ">Patient Tracker App</a>
+        
     </nav>
     <!-- End NavBar -->
 
@@ -49,18 +50,12 @@
           </div>    
     </div>
    </div>
+   
     <div class="container text-center">
         <div class="row showPatient" id ="showPatient">
-            <!-- <div class="col-3 mt-3" >
-               <div class="card text-center">
-                   <div class="card-body card-shaddow">
-                       <h5 class="card-title">Paitent Name</h5>
-                       <p class="card-text">Paitent Number</p>
-                       <p class="card-text">Paitent ID</p>
-                       <button class="btn btn-info" type="button">View History</button>
-                   </div>
-               </div>
-            </div> -->
+            <div class="col-12">
+                <div class="loader"></div>
+            </div>
         </div>    
     </div>
 </div>
@@ -167,6 +162,27 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success"  data-dismiss="modal" id="btnAddHistory"><i class="fas fa-check"></i></button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="delet-paitent" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title"><strong>Alert!!!!</strong></h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are You Really want to delete the Record!!!!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"  data-dismiss="modal" id="btnDelete"><i class="fas fa-check"></i></button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i></button>
             </div>
         </div>
