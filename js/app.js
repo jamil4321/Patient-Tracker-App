@@ -30,9 +30,15 @@ let arrMedication = [];
 // Add Button Function
 function addButton() {
   modalName.innerHTML = "Add Paitent";
+  radioButton[0].disabled = false;
+  radioButton[1].disabled = false;
+  history.style.overflowY='';
+  history.style.height= ''
   name.disabled = false;
   age.disabled = false;
   number.disabled = false;
+  history.style.overflowY='';
+  history.style.height= '';
   if (paitentData.length == 0) {
     pid = "p-1";
   } else {
@@ -153,8 +159,8 @@ function getPaitent(getId) {
   number.disabled = true;
   radioButton[0].disabled = true;
   radioButton[1].disabled = true;
-  history.style.overflowY='scroll';
-  history.style.height= '150px'
+  history.style.overflowY='';
+  history.style.height= '';
   db.ref("patients/p-" + getId).on("value", data => {
     history.innerHTML = ""
     dbData = data.val();
@@ -162,12 +168,15 @@ function getPaitent(getId) {
     paitentID.value = dbData.id;
     age.value = dbData.age;
     number.value = dbData.number;
+
     if (dbData.gender == "male") {
       radioButton[1].checked = true;
     } else {
       radioButton[0].checked = true;
     }
     if(dbData.date){
+      history.style.overflowY='scroll';
+      history.style.height= '150px'
       arrDate = dbData.date
       arrDisease = dbData.disease
       arrMedication = dbData.medication
